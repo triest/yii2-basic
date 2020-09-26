@@ -14,7 +14,7 @@
     class UploadForm extends Model
     {
         public $datafile;
-
+        public $store_id;
 
         /**
          * @return array the validation rules.
@@ -24,7 +24,8 @@
             return [
                     [['datafile'], 'required'],
                     [['datafile'], 'file'],
-                    [['store_id'],'required','integer']
+                    ['store_id', 'exist', 'targetClass' => '\app\models\Store', 'targetAttribute' => 'id']
+
             ];
         }
 
@@ -40,7 +41,8 @@
         }
 
 
-        public function createJob(){
+        public function createJob()
+        {
 
         }
 

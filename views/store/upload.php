@@ -4,7 +4,9 @@
 
 <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
 
-<?= $form->field($model, 'datafile')->fileInput() ?>
+<?= $this->render('_form', [
+        'model' => $model,'stores'=>$stores
+]) ?>
 
 <button>Submit</button>
 
