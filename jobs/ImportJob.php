@@ -52,9 +52,9 @@
                         continue;
                     }
                     foreach ($array_values as $key => $value) {
-                            $find_title->$key = $value;
+                        $find_title->$key = $value;
                     }
-
+                    $find_title->store_id = $this->store_id;
                     $find_title->save(false);
                 }
                 fclose($handle);
