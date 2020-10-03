@@ -24,6 +24,7 @@
             return [
                     [['datafile'], 'required'],
                     [['datafile'], 'file'],
+                    [['store_id'], 'required'],
                     ['store_id', 'exist', 'targetClass' => '\app\models\Store', 'targetAttribute' => 'id']
 
             ];

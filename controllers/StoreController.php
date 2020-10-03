@@ -67,23 +67,31 @@
             if (Yii::$app->request->isPost) {
                 $file = UploadedFile::getInstance($model, 'datafile');
                 if ($file != null) {
-
-                    $store_id = Yii::$app->request->post('store_id');
+                    $request = Yii::$app->request;
+                    $store_id = intval($request->post('UploadForm')['store_id']);
                     $import = new Import();
+                    $import->store_id = $store_id;
                     $filename = $import->upload($file);
+                    $import->save();
 
                     $id = Yii::$app->queue->push(new ImportJob([
                             'file' => Yii::$app->basePath . '/web/uploads/' . $store_id . '/' . $filename,
-                            'store_id' => $store_id
+                            'store_id' => $store_id,
+                            'import_id'=>$import->id
                     ]));
                     $import->job_id = $id;
-                    $import->store_id = $store_id;
-                    $import->save();
+                    $import->save(false);
                 }
             }
             $stores = Store::find()->all();
             return $this->render('upload', ['model' => $model, 'stores' => $stores]);
+        }
 
+        public function actionIndex()
+        {
+            //   $stores = Store::find()->all();
+            $imports = Import::find()->all();
+            return $this->render('index', ['imports' => $imports]);
         }
     }
 

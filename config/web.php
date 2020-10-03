@@ -52,7 +52,8 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                    'store/upload'=>'store/upload'
+                    'store/upload'=>'store/upload',
+                    'stores'=>'store/index'
             ],
         ],
 
