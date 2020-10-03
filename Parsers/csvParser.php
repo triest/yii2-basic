@@ -69,7 +69,7 @@
                     foreach ($array_values as $key => $value) {
                         $find_title->$key = $value;
                     }
-                    fclose($handle);
+
                     $import = Import::find()->where(['id' => $this->import_id])->one();
                     if ($import != null) {
                         $import->success_count = $success_count;
@@ -78,9 +78,11 @@
                         $find_title->store_id = $import->store_id;
                     }
                     $find_title->save(false);
+
                 }
-                fclose($handle);
 
             }
+            fclose($handle);
+
         }
     }
