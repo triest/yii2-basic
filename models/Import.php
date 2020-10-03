@@ -80,7 +80,9 @@
 
         public function getStatus()
         {
-
+            if($this->job_id==null){
+                return null;
+            }
             if (Yii::$app->queue->isWaiting($this->job_id)) {
                 return "Ожидаетть запуск";
             }

@@ -7,6 +7,7 @@
     use app\models\Store;
     use app\models\UploadForm;
     use Yii;
+    use yii\data\Pagination;
     use yii\filters\AccessControl;
     use yii\web\Controller;
     use yii\web\Response;
@@ -77,7 +78,7 @@
                     $id = Yii::$app->queue->push(new ImportJob([
                             'file' => Yii::$app->basePath . '/web/uploads/' . $store_id . '/' . $filename,
                             'store_id' => $store_id,
-                            'import_id'=>$import->id
+                            'import_id' => $import->id
                     ]));
                     $import->job_id = $id;
                     $import->save(false);
@@ -90,8 +91,13 @@
         public function actionIndex()
         {
             //   $stores = Store::find()->all();
-            $imports = Import::find()->all();
-            return $this->render('index', ['imports' => $imports]);
+            $query = Import::find();
+            $countQuery = clone $query;
+            $pages = new Pagination(['totalCount' => $countQuery->count()]);
+            $models = $query->offset($pages->offset)
+                    ->limit($pages->limit)
+                    ->all();
+            return $this->render('index', ['imports' => $models, 'pages' => $pages,]);
         }
     }
 
