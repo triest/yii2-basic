@@ -15,6 +15,7 @@
      * @property string|null $filename
      * @property int|null $success_count
      * @property int|null $error_count
+     * @property string|null $error
      */
     class Import extends \yii\db\ActiveRecord
     {
@@ -33,7 +34,7 @@
         {
             return [
                     [['store_id', 'job_id', 'success_count', 'error_count'], 'integer'],
-                    [['status', 'filename'], 'string', 'max' => 255],
+                    [['status', 'filename', 'error'], 'string', 'max' => 255],
             ];
         }
 
@@ -50,6 +51,7 @@
                     'filename' => 'Filename',
                     'success_count' => 'Success Count',
                     'error_count' => 'Error Count',
+                    'error' => 'Error',
             ];
         }
 
