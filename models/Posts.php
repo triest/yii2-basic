@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use DateTime;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -69,6 +70,7 @@ class Posts extends \yii\db\ActiveRecord
     }
 
     public function getHumanDate(){
-        return $this->create_at;
+        $date = new DateTime($this->create_at);
+        return $date->format('Y-m-d H:i');
     }
 }

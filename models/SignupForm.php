@@ -20,8 +20,10 @@ class SignupForm extends Model
     public function rules()
     {
         return [
-                [['username', 'password'], 'required'],
-                ['username', 'unique', 'targetClass' => User::className(),  'message' => 'Этот логин уже занят'],
+                [['username', 'password', 'password_repeat'], 'required'],
+                ['password', 'compare', 'compareAttribute' => 'password_repeat'],
+                ['username', 'unique', 'targetClass' => User::className(), 'message' => 'Этот логин уже занят'],
+                ['username', 'unique', 'targetClass' => User::class, 'targetAttribute' => 'username'],
         ];
     }
 
@@ -31,6 +33,7 @@ class SignupForm extends Model
                 'id',
                 'name',
                 'password',
+                'password_repeat',
                 'name',
                 'email',
         ];
@@ -49,22 +52,20 @@ class SignupForm extends Model
 
     public function signup()
     {
-
         if ($this->validate()) {
             $user = new User();
             //    $user->attributes = $this->attributes;
             $user->username = $this->username;
             $user->email = $this->email;
             $hash = Yii::$app->getSecurity()->generatePasswordHash($this->password);
-            $user->password=$hash;
+            $user->password = $hash;
             $user->save();
-            var_dump($user); die();
+
             return $user;
         } else {
             // validation failed: $errors is an array containing error messages
             return $this->errors;
         }
-
     }
 
 }
