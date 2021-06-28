@@ -11,6 +11,11 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+        'modules' => [
+                'admin' => [
+                        'class' => 'app\modules\Admin',
+                ],
+        ],
     'components' => [
             'queue' => [
                     'class' => \yii\queue\file\Queue::class,
@@ -47,6 +52,7 @@ $config = [
                 ],
             ],
         ],
+
         'db' => $db,
         'urlManager' => [
             'enablePrettyUrl' => true,
@@ -56,6 +62,7 @@ $config = [
                     'stores'=>'store/index'
             ],
         ],
+
 
     ],
     'params' => $params,

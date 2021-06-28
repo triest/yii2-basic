@@ -48,6 +48,7 @@ AppAsset::register($this);
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
+        <a class="btn btn-primary" href="/post">Posts</a>
         <?= Alert::widget() ?>
         <?= $content ?>
     </div>

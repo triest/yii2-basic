@@ -22,7 +22,7 @@ class AuthController extends Controller
     {
         $model = new SignupForm();
 
-        if($model->load(\Yii::$app->request->post()) && $model->validate()){
+        if($model->load(\Yii::$app->request->post())){
             $user = new User();
             $user->username = $model->username;
             $user->password = \Yii::$app->security->generatePasswordHash($model->password);
