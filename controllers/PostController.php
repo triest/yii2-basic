@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use yii\helpers\VarDumper;
 use app\models\PostForm;
 use app\models\Posts;
 use Yii;
@@ -63,7 +64,9 @@ class PostController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $posts=Posts::find()->all();
+
+        return $this->render('index',['posts'=>$posts]);
     }
 
     /**
@@ -119,13 +122,22 @@ class PostController extends Controller
                 $post->description=$model->description;
                 $post->author_id=Yii::$app->user->id;
 
-                if($post->save()){
+                if($post->save(false)){
+
                     return $this->redirect('/');
                 }
 
         }
         return $this->render('create', [
             'model' => $model,
+        ]);
+    }
+
+    public function actionView($id){
+
+        $post=Posts::findOne($id);
+        return $this->render('view', [
+                'model' => $post,
         ]);
     }
 

@@ -59,7 +59,8 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                     'store/upload'=>'store/upload',
-                    'stores'=>'store/index'
+                    'stores'=>'store/index',
+                    'post/<id:\d+>'=>'post/view'
             ],
         ],
 
