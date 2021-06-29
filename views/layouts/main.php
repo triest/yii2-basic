@@ -54,8 +54,17 @@ AppAsset::register($this);
 
 
       <div class="col-sm-8 blog-main">
+        <div class="site-index">
 
+          <div class="jumbotron">
+            <a class="btn btn-primary" href="post/create"></a>
+          </div>
+
+          <div class="body-content">
       <?= $content ?>
+          </div>
+        </div>
+
 
       </div><!-- /.blog-main -->
 

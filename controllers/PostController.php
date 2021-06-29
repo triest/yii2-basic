@@ -136,8 +136,9 @@ class PostController extends Controller
     public function actionView($id){
 
         $post=Posts::findOne($id);
+
         return $this->render('view', [
-                'model' => $post,
+                'post' => $post,
         ]);
     }
 
