@@ -36,7 +36,7 @@ class Posts extends \yii\db\ActiveRecord
             [['author_id'], 'integer'],
             [['update_at', 'create_at'], 'required'],
             [['update_at', 'create_at'], 'safe'],
-            [['title'], 'string', 'max' => 255],
+            [['title','main_image'], 'string', 'max' => 255],
             [['description'], 'string', 'max' => 2048],
         ];
     }

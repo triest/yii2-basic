@@ -6,6 +6,7 @@
 /* @var $model app\models\LoginForm */
 
 
+use yii\bootstrap\Html;
 
 $this->title = $post->title;
 $this->params['breadcrumbs'][] = $this->title;
@@ -19,7 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="card single_post">
                     <div class="body">
                         <div class="img-post">
-                            <img class="d-block img-fluid" src="https://via.placeholder.com/800x280/87CEFA/000000" alt="First slide">
+                            <img class="d-block img-fluid" src="<?="/uploads/".$post->main_image?> " alt="First slide" width="400px">
+
                         </div>
                         <h3><?=$post->title ?></h3>
                         <p><?=$post->description ?></p>

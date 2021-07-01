@@ -12,9 +12,12 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use yii\web\UploadedFile;
 
 class PostController extends Controller
 {
+
+    public $upload_path='images/';
     /**
      * {@inheritdoc}
      */
@@ -115,22 +118,22 @@ class PostController extends Controller
         }
 
         $model = new PostForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
 
-                $post=new Posts();
-                $post->title=$model->title;
-                $post->description=$model->description;
-                $post->author_id=Yii::$app->user->id;
-
-                if($post->save(false)){
-
-                    return $this->redirect('/');
-                }
-
+        if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            $post=new Posts();
+            $post->title=$model->title;
+            $post->description=$model->description;
+            $post->author_id=Yii::$app->user->id;
+            if ($model->imageFile ) {
+                  if(is_string($uploadFile_name=$model->upload())){
+                      $post->main_image=$uploadFile_name;
+                  }
+            }
+            $post->save(false);
         }
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+
+        return $this->render('create', ['model' => $model]);
     }
 
     public function actionView($id){
