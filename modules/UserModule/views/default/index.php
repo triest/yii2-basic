@@ -1,12 +1,35 @@
 <div class="user-default-index">
-    <h1><?= $this->context->action->uniqueId ?></h1>
-    <p>
-        This is the view content for action "<?= $this->context->action->id ?>".
-        The action belongs to the controller "<?= get_class($this->context) ?>"
-        in the "<?= $this->context->module->id ?>" module.
-    </p>
-    <p>
-        You may customize this page by editing the following file:<br>
-        <code><?= __FILE__ ?></code>
-    </p>
+    <?php
+    use yii\bootstrap\ActiveForm;
+    use yii\helpers\Html;
+
+   $form = ActiveForm::begin([
+                                                        'id' => 'login-form',
+                                                        'layout' => 'horizontal',
+                                                        'fieldConfig' => [
+                                                                'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
+                                                                'labelOptions' => ['class' => 'col-lg-1 control-label'],
+                                                        ],
+                                                ]); ?>
+
+
+
+as
+
+    <?= $form->field($model, 'title')->textInput(['autofocus' => true]) ?>
+
+    <?= $form->field($model, 'description') ?>
+
+    <?= $form->field($model, 'imageFile')->fileInput() ?>
+
+  <div class="form-group">
+    <div class="col-lg-offset-1 col-lg-11">
+        <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+    </div>
+  </div>
+
+
+
+    <?php ActiveForm::end(); ?>
+
 </div>
