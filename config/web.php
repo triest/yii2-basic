@@ -60,7 +60,8 @@ $config = [
             'rules' => [
                     'store/upload'=>'store/upload',
                     'stores'=>'store/index',
-                    'post/<id:\d+>'=>'post/view'
+                    'post/<id:\d+>'=>'post/view',
+                    'comment/send'=>'comment/send'
             ],
         ],
 

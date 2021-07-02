@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\CommentForm;
 use yii\helpers\VarDumper;
 use app\models\PostForm;
 use app\models\Posts;
@@ -140,8 +141,12 @@ class PostController extends Controller
 
         $post=Posts::findOne($id);
 
+        $commentForm=new CommentForm();
+
+
+
         return $this->render('view', [
-                'post' => $post,
+                'post' => $post,'commentForm'=>$commentForm
         ]);
     }
 

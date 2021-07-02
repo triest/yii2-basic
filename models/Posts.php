@@ -73,4 +73,9 @@ class Posts extends \yii\db\ActiveRecord
         $date = new DateTime($this->create_at);
         return $date->format('Y-m-d H:i');
     }
+
+    public function getComments()
+    {
+        return $this->hasMany(Comment::class, ['post_id' => 'id']);
+    }
 }
