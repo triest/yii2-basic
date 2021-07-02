@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use DateTime;
 use Yii;
 
 /**
@@ -53,5 +54,10 @@ class Comment extends \yii\db\ActiveRecord
 
     public function getUser(){
         return $this->hasOne(User::class, ['id' => 'user_id']);
+    }
+
+    public function getHumanDate(){
+        $date = new DateTime($this->create_at);
+        return $date->format('Y-m-d H:i');
     }
 }

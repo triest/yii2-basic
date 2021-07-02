@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <h5 class="m-b-0"><?=$comment->getUser()->one()->username ?></h5>
                                     <p><?=$comment->text ?></p>
                                     <ul class="list-inline">
-                                        <li><a href="javascript:void(0);">Mar 09 2018</a></li>
+                                        <li><a href="javascript:void(0);"><?=$comment->getHumanDate() ?></a></li>
                                     </ul>
                                 </div>
                             </li>
