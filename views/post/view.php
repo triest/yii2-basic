@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                     <div class="body">
                         <ul class="comment-reply list-unstyled">
-                           <? foreach ($post->comments as $comment){ ?>
+                           <? foreach ($post->getComments()->orderBy('create_at','desc')->all() as $comment){ ?>
                             <li class="row clearfix">
                                 <div class="icon-box col-md-2 col-4"><img class="img-fluid img-thumbnail" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Awesome Image"></div>
                                 <div class="text-box col-md-10 col-8 p-l-0 p-r0">

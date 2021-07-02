@@ -31,8 +31,8 @@ AppAsset::register($this);
   <div class="i_con">
     <ul class="nav navbar-nav text-uppercase">
         <?php if (Yii::$app->user->isGuest): ?>
-          <li><a href="<?= Url::toRoute(['auth/login']) ?>">Login</a></li>
-          <li><a href="<?= Url::toRoute(['auth/signup']) ?>">Register</a></li>
+          <li><a href="<?= Url::toRoute(['/auth/login']) ?>">Login</a></li>
+          <li><a href="<?= Url::toRoute(['/auth/signup']) ?>">Register</a></li>
         <?php else: ?>
             <?= Html::beginForm(['/auth/logout'], 'post')
             . Html::submitButton(
@@ -57,7 +57,7 @@ AppAsset::register($this);
         <div class="site-index">
 
           <div class="jumbotron">
-            <a class="btn btn-primary" href="post/create"></a>
+            <a class="btn btn-primary" href="/post/create"></a>
           </div>
 
           <div class="body-content">

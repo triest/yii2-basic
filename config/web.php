@@ -12,8 +12,8 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
         'modules' => [
-                'admin' => [
-                        'class' => 'app\modules\Admin',
+                'user' => [
+                        'class' => 'app\modules\UserModule\UserModule',
                 ],
         ],
     'components' => [
@@ -61,7 +61,16 @@ $config = [
                     'store/upload'=>'store/upload',
                     'stores'=>'store/index',
                     'post/<id:\d+>'=>'post/view',
-                    'comment/send'=>'comment/send'
+                    'comment/send'=>'comment/send',
+                    ['class' => 'yii\rest\UrlRule', 'controller' => 'Api',  'prefix' => 'api'],
+                    'api/<id:\d+>'=>'api/view',
+                    [
+                            'pattern' => 'users',
+                            'route' => 'users/index',
+                            'suffix' => '/',
+                            'normalizer' => false, // отключаем нормализатор для этого правила
+                    ],
+
             ],
         ],
 
