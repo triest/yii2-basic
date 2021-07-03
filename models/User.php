@@ -2,6 +2,10 @@
 
 namespace app\models;
 
+/**
+
+ * @property string $main_image
+ */
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
 
@@ -26,6 +30,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules() {
         return [
                 [['username', 'password'], 'required', 'message' => 'Заполните поле'],
+         /*       [['main_image'],'string' , 'message' => 'Заполните поле'],*/
                 ['username', 'unique', 'targetClass' => User::className(),  'message' => 'Этот логин уже занят'],
         ];
     }
@@ -44,13 +49,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        foreach (self::$users as $user) {
-            if ($user['accessToken'] === $token) {
-                return new static($user);
-            }
-        }
-
-        return null;
+        return static::findOne(['access_token' => $token]);
     }
 
     public function validatePassword($password)

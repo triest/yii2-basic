@@ -22,24 +22,23 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        if(!Yii::$app->user->id){
+        if (!Yii::$app->user->id) {
             return $this->redirect('/auth/login');
         }
 
-        $model = new PostForm();
+        $model = new UserForm();
+
 
         if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-            $post=new Posts();
-            $post->title=$model->title;
-            $post->description=$model->description;
-            $post->author_id=Yii::$app->user->id;
-            if ($model->imageFile ) {
-                if(is_string($uploadFile_name=$model->upload())){
-                    $post->main_image=$uploadFile_name;
+            if ($model->imageFile) {
+                $user = Yii::$app->user;
+                if (is_string($uploadFile_name = $model->upload($user))) {
+                    $user2 = User::findOne($user->id);
+                    $user2->main_image = $uploadFile_name;
+                    $user2->save(false);
                 }
             }
-            $post->save(false);
         }
 
         return $this->render('index', ['model' => $model]);

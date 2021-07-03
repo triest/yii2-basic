@@ -12,7 +12,6 @@ class ApiController  extends Controller
 
 
 
-
     protected function verbs()
     {
         return [

@@ -11,10 +11,10 @@ use yii\web\UploadedFile;
  */
 class UserForm extends Model
 {
-        public $title;
-        public $description;
+    public $title;
+    public $description;
 
-        public $uploadDirecoty='uploads/';
+    public $uploadDirecoty = 'uploads/users/';
 
     /**
      * @var UploadedFile
@@ -28,20 +28,23 @@ class UserForm extends Model
         ];
     }
 
-    public function upload()
+    public function upload($user)
     {
         if ($this->validate()) {
-             $name=$this->random_filename(30). '.' . $this->imageFile->extension;
-            $this->imageFile->saveAs('uploads/' . $name );
+
+
+            $name = $this->random_filename(30) . '.' . $this->imageFile->extension;
+            $this->imageFile->saveAs($this->uploadDirecoty . $name);
+
             return $name;
         } else {
             return false;
         }
     }
 
-    function random_filename($length,  $extension = '')
+    function random_filename($length, $extension = '')
     {
-        $directory=$this->uploadDirecoty;
+        $directory = $this->uploadDirecoty;
 
         // default to this files directory if empty...
         $dir = !empty($directory) && is_dir($directory) ? $directory : dirname(__FILE__);

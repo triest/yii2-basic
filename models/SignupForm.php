@@ -22,7 +22,6 @@ class SignupForm extends Model
         return [
                 [['username', 'password', 'password_repeat'], 'required'],
                 ['password', 'compare', 'compareAttribute' => 'password_repeat'],
-                ['username', 'unique', 'targetClass' => User::className(), 'message' => 'Этот логин уже занят'],
                 ['username', 'unique', 'targetClass' => User::class, 'targetAttribute' => 'username'],
         ];
     }

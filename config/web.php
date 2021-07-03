@@ -12,8 +12,12 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
         'modules' => [
-                'user' => [
+                'user-module' => [
                         'class' => 'app\modules\UserModule\UserModule',
+                ],
+                'bearer-api' => [
+                        'class' => 'app\modules\BearerApi\BearerApi',
+
                 ],
         ],
     'components' => [
@@ -70,6 +74,15 @@ $config = [
                             'suffix' => '/',
                             'normalizer' => false, // отключаем нормализатор для этого правила
                     ],
+                    '<module' => '<module>/default/index',
+                    '<module>/edit/<id:\d+>' => '<module>/default/edit',
+                    '<module>/delete/<id:\d+>' => '<module>/default/delete',
+                    '<module>/<controller>' => 'bearerApi/<controller>/index',
+                    '<module/<id:\d+>' => '<module>/default/view',
+                    '<module>/<controller>/edit/<id:\d+>' => '<module>/<controller>/edit',
+                    '<module>/<controller>/delete/<id:\d+>' => '<module>/<controller>/delete',
+                    '<module>/<controller>/<action:\w+>' => '<module>/<controller>/<action>',
+
 
             ],
         ],
