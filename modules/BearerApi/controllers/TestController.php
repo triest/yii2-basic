@@ -75,4 +75,8 @@ class TestController extends Controller
     public function actionEdit($id){
         die($id);
     }
+
+    public function actionTest(){
+        die("dss");
+    }
 }
