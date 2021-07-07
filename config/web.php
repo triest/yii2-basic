@@ -40,6 +40,9 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+            'authManager' => [
+                    'class' => 'yii\rbac\PhpManager',
+            ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             // send all mails to a file by default. You have to set
@@ -62,10 +65,9 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                    'store/upload'=>'store/upload',
+              /*      'store/upload'=>'store/upload',
                     'stores'=>'store/index',
-                    'post/<id:\d+>'=>'post/view',
-                    'comment/send'=>'comment/send',
+                    'comment/send'=>'comment/send',*/
                     ['class' => 'yii\rest\UrlRule', 'controller' => 'Api',  'prefix' => 'api'],
                     'api/<id:\d+>'=>'api/view',
                     [
@@ -74,16 +76,19 @@ $config = [
                             'suffix' => '/',
                             'normalizer' => false, // отключаем нормализатор для этого правила
                     ],
-                    '<module' => '<module>/default/index',
-                    '<module>/edit/<id:\d+>' => '<module>/default/edit',
-                    '<module>/delete/<id:\d+>' => '<module>/default/delete',
-                    '<module>/<controller>' => '<module>/<controller>/index',
-                    '<module/<id:\d+>' => '<module>/default/view',
-                    '<module>/<controller>/edit/<id:\d+>' => '<module>/<controller>/edit',
-                    '<module>/<controller>/delete/<id:\d+>' => '<module>/<controller>/delete',
-                    '<module>/<controller>/<action:\w+>' => '<module>/<controller>/<action>',
-
-
+                    '<controller:\w+>'=>'<controller>/index',
+                    '<controller:\w+>/<id:\d+>'=>'<controller>/view',
+                    '<controller:\w+>/<action>'=>'<controller>/<action>',
+                    '<module:\w+>' => '<module>/default/index',
+                    '<module:\w+>/<id:\d+>' => '<module>/default/view',
+                    '<module:\w+>/edit/<id:\d+>' => '<module>/default/edit',
+                    '<module:\w+>/delete/<id:\d+>' => '<module>/default/delete',
+                    '<module:[\w\-]+>/<action:[\w\-]+>' => '<module>/default/<action>',
+                    '<module:[\w\-]+>/<controller:\w+>' => '<module>/<controller>/index',
+                    '<module:[\w\-]+>/<controller:\w+>/edit/<id:\d+>' => '<module>/<controller>/edit',
+                    '<module:[\w\-]+>/<controller:\w+>/delete/<id:\d+>' => '<module>/<controller>/delete',
+                    '<module:[\w\-]+>/<controller:\w+>/<id:\d+>' => '<module>/<controller>/view',
+                    '<module:[\w\-]+>/<controller:\w+>/<action>' => '<module>/<controller>/<action>',
             ],
         ],
 

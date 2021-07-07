@@ -8,6 +8,7 @@ use app\models\SignupForm;
 use app\models\User;
 use app\models\UserForm;
 use Yii;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\UploadedFile;
 
@@ -44,5 +45,20 @@ class DefaultController extends Controller
         return $this->render('index', ['model' => $model]);
     }
 
+    public function actionView($id){
+        $user2 = User::findOne($id);
+        if(!$user2){
+            return 404;
+        }
+
+        return $this->render('view', ['model' => $user2]);
+    }
+
+    public function actionTest(){
+        $user2 = User::findOne(1);
+
+
+        return $this->render('test', ['model' => $user2]);
+    }
 
 }

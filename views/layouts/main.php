@@ -70,7 +70,7 @@ AppAsset::register($this);
 
       <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
            <? if(!Yii::$app->user->isGuest){ ?>
-            <a href="/user"> Личный кабинет</a>
+            <a href="/user-module"> Личный кабинет</a>
         <? } ?>
       </div><!-- /.blog-sidebar -->
 

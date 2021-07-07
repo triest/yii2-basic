@@ -13,6 +13,7 @@ use app\models\SignupForm;
 use app\models\User;
 use Yii;
 use yii\web\Controller;
+use yii\web\Response;
 
 
 class AuthController extends Controller
@@ -28,6 +29,8 @@ class AuthController extends Controller
             $user->password = \Yii::$app->security->generatePasswordHash($model->password);
 
             if($user->save(false)){
+
+                Yii::$app->user->login($user,  3600*24*30 );
                 return $this->goHome();
             }
         }
@@ -35,7 +38,6 @@ class AuthController extends Controller
 
         return $this->render('signup', ['model' => $model]);
     }
-
 
     /**
      * Login action.
@@ -47,15 +49,19 @@ class AuthController extends Controller
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
+
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->redirect(['post/index']);
+            return $this->goBack();
         }
+
         $model->password = '';
         return $this->render('login', [
                 'model' => $model,
         ]);
     }
+
+
 
     /**
      * Logout action.
